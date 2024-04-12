@@ -3,6 +3,9 @@ Este repositorio contiene las prácticas realizadas por Garcia Justo y Boero Mar
 
 ## Contenido
 - **Práctica 1:** Métodos Numéricos.
+- **Práctica 2:** Modelos compartimentales.
+- **Práctica 3:** Modelos poblacionales.
+- **Práctica 4:** Modelos epidemiológicos.
 
 
  

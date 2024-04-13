@@ -6,6 +6,7 @@ Este repositorio contiene las prácticas realizadas por Garcia Justo y Boero Mar
 - **Práctica 2:** Modelos compartimentales.
 - **Práctica 3:** Modelos poblacionales.
 - **Práctica 4:** Modelos epidemiológicos.
+- **Práctica 5:** Modelos por analogías.
 
 
  

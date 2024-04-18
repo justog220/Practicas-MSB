@@ -186,9 +186,10 @@ plt.tight_layout()
 # Mostrar el gráfico
 plt.show()
 
+#--------Ejercicio 4---------
 
 Is3 = np.zeros(len(ts))
-paso_pot = 0.01
+paso_pot = 0.1
 potenciales = np.arange(-100, -70+paso_pot, paso_pot)
 potenciales = potenciales[::-1]
 
@@ -255,7 +256,7 @@ for i in potenciales:
 
 				# Tercer subplot
 				axs[2, 0].plot(ts, gNa_s1, label=r"$g_{Na}$")
-				axs[2, 0].plot(ts, gK_s1, label=r"$g_{K}$")
+				axs[2, 0].plot(ts, gK_s1, label=r"$g_{K}$", color='yellow')
 				axs[2, 0].legend()
 				axs[2, 0].set_ylabel("Conductancia")
 				axs[2, 0].set_xlabel("t(s)")
@@ -291,7 +292,7 @@ for i in potenciales:
 
 				# Tercer subplot
 				axs[2, 1].plot(ts, gNa_s2, label=r"$g_{Na}$")
-				axs[2, 1].plot(ts, gK_s2, label=r"$g_{K}$")
+				axs[2, 1].plot(ts, gK_s2, label=r"$g_{K}$", color='yellow')
 				axs[2, 1].legend()
 				axs[2, 1].set_ylabel("Conductancia")
 				axs[2, 1].set_xlabel("t(s)")
@@ -327,7 +328,7 @@ for i in potenciales:
 
 				# Tercer subplot
 				axs[2, 2].plot(ts, gNa_s3, label=r"$g_{Na}$")
-				axs[2, 2].plot(ts, gK_s3, label=r"$g_{K}$")
+				axs[2, 2].plot(ts, gK_s3, label=r"$g_{K}$", color='yellow')
 				axs[2, 2].legend()
 				axs[2, 2].set_ylabel("Conductancia")
 				axs[2, 2].set_xlabel("t(s)")
@@ -339,4 +340,36 @@ for i in potenciales:
 
 				break
 	
+#--------Ejercicio 5---------
+# Valor de corriente constante (en microamperios)
+I_constante = 10
+paso = 0.01
+ts = np.arange(0, 100, paso)
 
+# Crea un array para almacenar la corriente constante aplicada durante todo el período
+Is_constante = [I_constante] * len(ts)
+
+# Simula el comportamiento del modelo con el estímulo constante
+vs, gNa_s, gK_s, m_s, n_s, h_s = euler(ts, m_0, h_0, n_0, pot_reposo, Is_constante)
+
+# Grafica la corriente de entrada, el potencial de membrana y las conductancias de sodio y potasio a lo largo del tiempo
+fig, axs = plt.subplots(3, 1, figsize=(8, 10))
+fig.suptitle("Estímulo de corriente constante")
+
+axs[0].set_title("Estimulo")
+axs[0].plot(ts, Is_constante)
+axs[0].set_ylabel(r"I($\mu A$)")
+axs[0].set_xlabel("t(s)")
+
+axs[1].plot(ts, vs)
+axs[1].set_ylabel(r"$V(mV)$")
+axs[1].set_xlabel(r"$t(s)$")
+
+axs[2].plot(ts, gNa_s, label=r"$g_{Na}$")
+axs[2].plot(ts, gK_s, label=r"$g_{K}$")
+axs[2].legend()
+axs[2].set_ylabel("Conductancia")
+axs[2].set_xlabel("t(s)")
+
+plt.tight_layout()
+plt.show()

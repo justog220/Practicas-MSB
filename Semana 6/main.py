@@ -38,6 +38,7 @@ class AutomataMiocardico:
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
+import copy
 fig, ax = plt.subplots()
 
 filas = 100
@@ -59,7 +60,8 @@ ts = np.arange(0, segundos, 0.001)
 artists = []
 def update(t):
     global G
-    G_futura = G
+    # G_futura = G
+    G_futura = copy.deepcopy(G)
     if (t-0.5)%1 == 0:
         G[centro[0]][centro[1]].auto_excitar()
     for f in range(filas):
@@ -95,8 +97,7 @@ def update(t):
             else:
                 G_futura[f][c].calc_E(G[f-1][c].E, G[f][c+1].E, G[f+1][c].E, G[f][c-1].E)        
                     
-                    
-            G = G_futura
+            G = copy.deepcopy(G_futura)
     im.set_array([[G[i][j].E for j in range(columnas)] for i in range(filas)])
 
     return [im]

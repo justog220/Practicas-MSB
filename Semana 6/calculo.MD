@@ -1,0 +1,1 @@
+Agarro el automata y mido la diferencia entre el primero y el ultimo.

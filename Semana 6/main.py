@@ -40,7 +40,22 @@ class AutomataMiocardico:
                     self.E = -90
                     self.estado = 'R'
                                     
-# fig, ax = plt.subplots()
+fig, ax = plt.subplots()
+
+segundos = 3
+ts = np.arange(0, segundos, 0.001)
+
+print("Prueba de automata aislado")
+automata_aislado = AutomataMiocardico()
+for t in ts:
+    if (t-0.5)%1 == 0:
+        vecinos = [25, 25, 25, 25]
+    else:
+        vecinos = 0
+    
+    
+
+print("Prueba de automata celular")
 
 filas = 50
 columnas = 50
@@ -55,8 +70,7 @@ if columnas%2 == 0:
 centro = (int(filas/2), int(columnas/2))
 
 
-segundos = 5
-ts = np.arange(0, segundos, 0.001)
+
 
 artists = []
 
@@ -65,7 +79,21 @@ G = [[AutomataMiocardico() for j in range(columnas)] for i in range(filas)]
 vmin, vmax = -90, 50
 im = plt.imshow([[G[i][j].E for j in range(columnas)] for i in range(filas)], vmin=vmin, vmax=vmax)
 
+cbar = plt.colorbar(im)
 count = 0
+
+columna_pto2 = centro[1]
+pto_2 = []
+
+def suma_potenciales(columna):
+    suma = 0
+
+    for i in range(len(columna)-1):
+        suma += columna[i].E - columna[i+1].E
+
+    suma += columna[len(columna)-1].E - columna[0].E
+
+    return suma
 
 for t in ts:
     # print(t)
@@ -87,6 +115,9 @@ for t in ts:
 
     G = [linea[:] for linea in G_futura]
 
+    pto_2.append(suma_potenciales([fila[columna_pto2] for fila in G]))
+
+
     if count%15 == 0:
         print("Draw ", t)
         im.set_data([[G[i][j].E for j in range(columnas)] for i in range(filas)])
@@ -96,4 +127,7 @@ for t in ts:
 
     count+=1
 
-
+# ax.clear()
+plt.close("all")
+plt.plot(ts, pto_2)
+plt.show()

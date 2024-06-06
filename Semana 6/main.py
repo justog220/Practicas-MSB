@@ -86,12 +86,15 @@ columna_pto2 = centro[1]
 pto_2 = []
 
 def suma_potenciales(columna):
-    suma = 0
+    # suma = 0
+# 
+    # for i in range(len(columna)-1):
+        # suma += columna[i].E - columna[i+1].E
+# 
+    # suma += columna[len(columna)-1].E - columna[0].E
 
-    for i in range(len(columna)-1):
-        suma += columna[i].E - columna[i+1].E
-
-    suma += columna[len(columna)-1].E - columna[0].E
+    suma = sum([automata.E for automata in columna])
+    # suma = columna[0].E - columna[len(columna)-1].E
 
     return suma
 
